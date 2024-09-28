@@ -1,0 +1,45 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id        Int              @id @default(autoincrement())
+  name      String           @db.VarChar(255)
+  email     String           @unique @db.VarChar(255)
+  status    enum_user_status @default(PENDING)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  deletedAt DateTime?        @db.Timestamptz(6)
+  password  String           @db.VarChar(255)
+
+  contacts contacts[]
+}
+
+model contacts {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique @db.VarChar(255)
+  email       String   @db.VarChar(255)
+  address     String   @db.VarChar(255)
+  designation String   @db.VarChar(255)
+  phoneNumber String   @db.VarChar(255)
+  createdById Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  createdBy users @relation(fields: [createdById], references: [id])
+
+  @@index([email])
+  @@index([phoneNumber])
+}
+
+enum enum_user_status {
+  PENDING
+  ACTIVE
+  DELETED
+}
