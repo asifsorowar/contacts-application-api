@@ -48,6 +48,23 @@ https://documenter.getpostman.com/view/10155418/2sAXqzVdFB
    npm run dev
    ```
 
+6. Run the test:
+
+   ```bash
+   npm run test
+   ```
+
+7. For running the test coverage:
+
+   ```bash
+   npm run test:coverage
+
+   A coverage report will be generated. Locate the index.html file inside the
+   coverage -> lcov-report folder.
+
+   Open the index.html file to view the test coverage report in a browser.
+   ```
+
 ## On production
 
 3. Adding the environment variables:
