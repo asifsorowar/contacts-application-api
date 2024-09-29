@@ -37,7 +37,7 @@ export class UserController {
 
     user = await this.userService.createUser(payload);
 
-    const token = await this.authService.createToken(user);
+    const token = await this.userService.createActivationToken(user);
 
     return res.status(201).send(token);
   };

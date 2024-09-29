@@ -8,3 +8,11 @@ export interface CREATE_USER {
   password: string;
   name: string;
 }
+
+export interface TOKEN_DATA {
+  id: number;
+  name: string;
+  email: string;
+  status: enum_user_status;
+  token_type: "ACTIVATION" | "AUTH";
+}

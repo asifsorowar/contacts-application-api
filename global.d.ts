@@ -1,9 +1,9 @@
-import { USER } from "@modules/user/types";
+import { TOKEN_DATA } from "@modules/user/types";
 
 declare global {
   namespace Express {
     interface Request {
-      auth?: Partial<USER>;
+      auth?: TOKEN_DATA;
     }
 
     interface Response {

@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import { prisma, Prisma } from "@database";
+import jwt from "jsonwebtoken";
+import { USER, TOKEN_DATA } from "../user/types";
 
 export class UserService {
   public async getUserById(userId: number) {
@@ -52,5 +54,17 @@ export class UserService {
   public async encryptPassword(password: string) {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
+  }
+
+  public async createActivationToken(user: Partial<USER>) {
+    const tokenData: TOKEN_DATA = {
+      id: user.id!,
+      name: user.name!,
+      email: user.email!,
+      status: user.status!,
+      token_type: "ACTIVATION",
+    };
+
+    return jwt.sign(tokenData, process.env.JWT_KEY as string);
   }
 }

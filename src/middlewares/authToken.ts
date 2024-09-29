@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { USER } from "@modules/user/types";
+import { TOKEN_DATA } from "@modules/user/types";
 
 export const decodeToken = (token: string) => {
-  return jwt.verify(token, process.env.JWT_KEY as string) as Partial<USER>;
+  return jwt.verify(token, process.env.JWT_KEY as string) as TOKEN_DATA;
 };
 
 export default (req: Request, res: Response, next: NextFunction) => {

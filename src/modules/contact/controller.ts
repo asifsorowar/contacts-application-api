@@ -46,7 +46,7 @@ export class ContactController {
     );
     if (!contact) return res.status(404).send("contact not found!");
 
-    return res.status(201).send(contact);
+    return res.status(200).send(contact);
   };
 
   create = async (
